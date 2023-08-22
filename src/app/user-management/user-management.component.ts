@@ -119,7 +119,7 @@ console.log(result)
 
   deleteUser(id: number): void {
     this.userService.deleteUser(id).subscribe(() => {
-      this.users = this.users.filter(user => user.id !== id);
+      this.filteredUsers = this.filteredUsers.filter(user => user.id !== id);
     });
   }
 
