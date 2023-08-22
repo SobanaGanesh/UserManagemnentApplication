@@ -8,7 +8,7 @@ import { UserManagementComponent } from '../user-management/user-management.comp
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/users', pathMatch: 'full' },
+  { path: '', redirectTo: '/UserManagement', pathMatch: 'full' },
   { path: 'users', component: UserListComponent },
   { path: 'users/:id', component: UserDetailsComponent },
   { path: 'userslist', component: UserFormComponent },
