@@ -20,8 +20,8 @@ export class UserDetailsComponent implements OnInit {
     this.getUser();
   }
 
-  getUser(): void {
+ getUser(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.userService.getUser(id).subscribe(user => this.user = user);
+    //this.userService.getUser(id).subscribe(user => this.user = user);
   }
 }

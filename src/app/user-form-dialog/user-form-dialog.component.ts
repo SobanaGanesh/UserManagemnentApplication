@@ -11,7 +11,7 @@ import { User } from '../user';
 })
 export class UserFormDialogComponent {
   userForm: FormGroup;
-
+  filteredUsers: User[] = [];
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -50,5 +50,49 @@ export class UserFormDialogComponent {
 
   cancel(): void {
     this.dialogRef.close(false);
+  }
+
+  onCancelClick(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmit(): void {
+    if (this.userForm.valid) {
+      if (this.userForm.valid) {
+        const newUser: User = {
+          id: 0, // This will be assigned by the API
+          ...this.userForm.value
+        };
+        const updatedUser: User = {
+          ...this.userForm.value,
+          
+        };
+        if (this.data.user) {
+          this.userService.updateUser(updatedUser).subscribe(() => {
+            const index = this.filteredUsers.findIndex(user => user.id === updatedUser.id);
+            if (index !== -1) {
+              //this.users[index] = updatedUser;
+              const result = {
+                param1: updatedUser, // Replace with your actual values
+                param2: index
+              };
+          
+              this.dialogRef.close(result);
+    
+            }
+    
+            this.userForm.reset();
+          });
+        }else{
+          this.userService.createUser(newUser).subscribe(createdUser => {
+            this.dialogRef.close(createdUser);
+          });
+        }
+       
+      }
+  
+      // Close the dialog
+      this.dialogRef.close(this.userForm);
+    }
   }
 }
